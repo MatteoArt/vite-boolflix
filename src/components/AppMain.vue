@@ -20,6 +20,7 @@ export default {
 
 <template>
 
+<div class="main-container">
     <section class="wrapper">
         <div v-if="store.filmList.length !== 0" class="div-film">
             <h2>Film</h2>
@@ -39,21 +40,33 @@ export default {
             </div>
         </div>
     </section>
+</div>
 
 </template>
 
 <style lang="scss" scoped>
 @use "../styles/partials/mixins.scss" as *;
 
+.main-container {
+    max-width: 1100px;
+    margin: auto;
+}
 section {
 
     &:last-child {
-        margin-top: 30px;
+        margin-top: 60px;
+    }
+
+    h2 {
+        text-align: center;
     }
 }
 .film-container, .tv-container {
     @include d-flex;
+    justify-content: center;
+    column-gap: 25px;
     flex-wrap: wrap;
-    row-gap: 15px;
+    row-gap: 30px;
+    margin: auto;
 }
 </style>
