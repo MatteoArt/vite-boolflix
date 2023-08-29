@@ -17,8 +17,8 @@ export default {
         <div class="header-title">boolflix</div>
         <div class="input-group">
             <input type="text" name="film" id="film"
-            placeholder="Cerca film" v-model="store.searchText">
-            <div class="btn" @click="store.fetchFilms(store.searchText)">Cerca</div>
+            placeholder="Cerca film e serie tv" v-model="store.searchText">
+            <div class="btn" @click="store.fetchFilmsAndTv(store.searchText)">Cerca</div>
         </div>
     </nav>
 </template>
