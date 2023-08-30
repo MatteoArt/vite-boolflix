@@ -1,6 +1,6 @@
 <script>
 
-import { setLang } from '../function.js';
+import { setLang, getStarRating } from '../function.js';
 
 export default {
     props: {
@@ -25,6 +25,7 @@ export default {
     },
     methods: {
         setLang,
+        getStarRating,
     }
 }
 
@@ -48,7 +49,10 @@ export default {
                 </li>
                 <li class="vote">
                     <span>Voto:</span>
-                    <div class="stars-empty"></div>
+                    <div class="stars-empty">
+                        <div class="stars-filled"
+                        :style="`width: ${getStarRating(filmData.vote_average)}%`"></div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -79,11 +83,31 @@ export default {
 
         .vote {
             @include d-flex;
+            align-items: center;
+            gap: 4px;
 
             .stars-empty {
                 position: relative;
+                font-family: FontAwesome;
 
+                &::before {
+                    content: "\f006 \f006 \f006 \f006 \f006";
+                    color: #FFBD00;
+                }
+            }
 
+            .stars-filled {
+                position: absolute;
+                top: 0;
+                left: 0;
+                white-space: nowrap;
+                overflow: hidden;
+                width: 0;
+
+                &::before {
+                    content: "\f005 \f005 \f005 \f005 \f005";
+                    color: #FFBD00;
+                }
             }
         }
     }
