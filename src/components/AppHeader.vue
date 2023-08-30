@@ -6,6 +6,14 @@ export default {
     data() {
         return {
             store,
+            menuList: [
+                "Home",
+                "Serie Tv",
+                "Film",
+                "Originali",
+                "Aggiunti di recente",
+                "La mia lista"
+            ]
         }
     }
 }
@@ -14,11 +22,24 @@ export default {
 
 <template>
     <nav>
-        <div class="header-title">boolflix</div>
+        <div class="logo-menu-wrapper">
+            <div class="nav-logo">
+                <img src="https://image.tmdb.org/t/p/w92/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" alt="netflix logo">
+            </div>
+            <div class="menu">
+                <ul>
+                    <li v-for="menuItem in menuList">
+                        {{ menuItem }}
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div class="input-group">
-            <input type="text" name="film" id="film"
-            placeholder="Cerca film e serie tv" v-model="store.searchText">
-            <div class="btn" @click="store.fetchFilmsAndTv(store.searchText)">Cerca</div>
+            <input type="text" name="film" id="film" placeholder="Cerca film e serie tv" v-model="store.searchText"
+                @keyup.enter="store.fetchFilmsAndTv(store.searchText)">
+            <div class="btn" @click="store.fetchFilmsAndTv(store.searchText)">
+                <i class="fa-solid fa-magnifying-glass fa-sm"></i>
+            </div>
         </div>
     </nav>
 </template>
@@ -29,25 +50,57 @@ export default {
 nav {
     @include d-flex;
     justify-content: space-between;
-    padding: 0 10px;
+    padding: 18px 12px;
+    background-color: #1B1B1B;
 
-    .header-title {
-        text-transform: uppercase;
+    .logo-menu-wrapper {
+        @include d-flex;
+        gap: 30px;
+        align-items: center;
     }
 
+    .menu {
+        @include d-flex;
+    }
+    ul {
+        list-style-type: none;
+        @include d-flex;
+        align-items: center;
+        gap: 15px;
+
+        li {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+
+            &:hover {
+                color: lightgoldenrodyellow;
+            }
+        }
+    }
     .input-group {
         @include d-flex;
-        gap: 7px;
+        gap: 5px;
 
         input {
             padding: 5px;
         }
+
         .btn {
-            padding: 5px 8px;
-            border: 1px solid black;
-            border-radius: 5px;
-            background-color: lightgray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 3px;
+            background-color: #28a745;
+            color: white;
             cursor: pointer;
+
+            &:hover {
+                background-color: #218838;
+            }
         }
     }
 }

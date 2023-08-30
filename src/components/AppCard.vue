@@ -46,7 +46,10 @@ export default {
                     <img :src="`https://flagsapi.com/${setLang(language.toUpperCase())}/shiny/32.png`"
                         :alt="setLang(language.toUpperCase())" :title="setLang(language.toUpperCase())">
                 </li>
-                <li>Voto: {{ filmData.vote_average }}</li>
+                <li class="vote">
+                    <span>Voto:</span>
+                    <div class="stars-empty"></div>
+                </li>
             </ul>
         </div>
     </div>
@@ -72,6 +75,16 @@ export default {
             @include d-flex;
             align-items: center;
             gap: 4px;
+        }
+
+        .vote {
+            @include d-flex;
+
+            .stars-empty {
+                position: relative;
+
+
+            }
         }
     }
 }

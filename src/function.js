@@ -33,3 +33,7 @@ export function setLang(str) {
     }
     return ris;
 }
+
+export function getStarRating(num) {
+    
+}
