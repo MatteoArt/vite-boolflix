@@ -23,7 +23,7 @@ export default {
 <div class="main-container">
     <section class="wrapper">
         <div v-if="store.filmList.length !== 0" class="div-film">
-            <h2>Film</h2>
+            <h1>Film</h1>
             <div class="film-container">
                 <AppCard v-for="film in store.filmList" 
                 :filmData="film" :key="film.id"></AppCard>
@@ -33,7 +33,7 @@ export default {
 
     <section class="wrapper">
         <div v-if="store.TvList.length !== 0" class="div-tv">
-            <h2>Serie TV</h2>
+            <h1>Serie TV</h1>
             <div class="tv-container">
                 <AppTVCard v-for="tv in store.TvList"
                 :TvData="tv" :key="tv.id"></AppTVCard>
@@ -53,8 +53,9 @@ section {
         margin-top: 60px;
     }
 
-    h2 {
-        text-align: center;
+    h1 {
+        margin: 0 0 10px 6px;
+        color: white;
     }
 }
 .film-container, .tv-container {

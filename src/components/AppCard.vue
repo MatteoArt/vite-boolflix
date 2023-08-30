@@ -54,11 +54,11 @@ export default {
             <img class="img-poster" 
             :src="getImgUrl()"
             :alt="filmData.title">
-        </div>
-        <div class="info">
+
+            <div class="info">
             <ul>
-                <li>Titolo: {{ filmData.title }}</li>
-                <li>Titolo Originale: {{ filmData.original_title }}</li>
+                <li><span>Titolo:</span> {{ filmData.title }}</li>
+                <li><span>Titolo Originale:</span> {{ filmData.original_title }}</li>
                 <li class="language">
                     <span style="padding-bottom: 1px;">Lingua:</span>
                     <img :src="`https://flagsapi.com/${setLang(language.toUpperCase())}/shiny/32.png`"
@@ -71,7 +71,11 @@ export default {
                         :style="`width: ${getStarRating(filmData.vote_average)}%`"></div>
                     </div>
                 </li>
+                <li class="overview">
+                    <p><span>Overview: </span> {{ filmData.overview }} </p>
+                </li>
             </ul>
+        </div>
         </div>
     </div>
 </template>
@@ -81,7 +85,6 @@ export default {
 @use "../styles/partials/_variables" as *;
 
 .film-item {
-    height: 100%;
     flex-basis: calc((#{$a} / 4) - #{$b});
     margin: 0 5px;
 
@@ -130,9 +133,35 @@ export default {
     }
 }
 .img-container {
+    position: relative;
 
-    img {
+    img.img-poster {
         width: 100%;
+    }
+
+    
+}
+.img-container:hover .info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+}
+.info {
+    display: none;
+    padding: 45px 10px 15px;
+    overflow: auto;
+
+    span {
+        font-weight: 600;
+        font-size: 17px;
+        color: lightgoldenrodyellow;
     }
 }
 </style>

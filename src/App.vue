@@ -22,6 +22,7 @@ export default {
 <style lang="scss">
 
 main {
-  margin-top: 40px;
+  padding-top: 40px;
+  background-color: #3F4041;
 }
 </style>

@@ -22,12 +22,28 @@ export default {
                 "w780",
                 "original"
             ],
-
+            imgDefault: "default.webp"
         }
     },
     methods: {
         setLang,
         getStarRating,
+        getPath(img) {
+            return new URL(`../assets/${img}`, import.meta.url).href;
+        },
+        getImgUrl() {
+            //se il poster_path è null, metto un immagine di default
+            if (!this.TvData.poster_path) {
+                const path = this.getPath(this.imgDefault);
+                return path;
+            }
+
+            const start_path = "https://image.tmdb.org/t/p/";
+            const res_path = `${this.imgSize[3]}`;
+            const end_path = `${this.TvData.poster_path}`;
+
+            return start_path + res_path + end_path;
+        }
     }
 }
 
@@ -37,13 +53,12 @@ export default {
     <div class="tv-item">
         <div class="img-container">
             <img class="img-poster"
-            :src="`https://image.tmdb.org/t/p/${imgSize[3]+TvData.poster_path}`"
+            :src="getImgUrl()"
             :alt="TvData.name + ' poster'">
-        </div>
-        <div class="info">
+            <div class="info">
             <ul>
-                <li>Titolo: {{ TvData.name }}</li>
-                <li>Titolo Originale: {{ TvData.original_name }}</li>
+                <li><span>Titolo:</span> {{ TvData.name }}</li>
+                <li><span>Titolo Originale:</span> {{ TvData.original_name }}</li>
                 <li class="language">
                     <span style="padding-bottom: 1px;">Lingua:</span>
                     <img :src="`https://flagsapi.com/${setLang(language.toUpperCase())}/shiny/32.png`"
@@ -56,7 +71,11 @@ export default {
                         :style="`width: ${getStarRating(TvData.vote_average)}%`"></div>
                     </div>
                 </li>
+                <li class="overview">
+                    <p><span>Overview: </span> {{ TvData.overview }} </p>
+                </li>
             </ul>
+        </div>
         </div>
     </div>
 </template>
@@ -114,9 +133,32 @@ export default {
     }
 }
 .img-container {
-
-img {
+position: relative;
+img.img-poster {
     width: 100%;
 }
+}
+.img-container:hover .info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+}
+.info {
+    display: none;
+    padding: 45px 10px 15px;
+    overflow: auto;
+
+    span {
+        font-weight: 600;
+        font-size: 17px;
+        color: lightgoldenrodyellow;
+    }
 }
 </style>
