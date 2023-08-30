@@ -21,11 +21,28 @@ export default {
                 "w780",
                 "original"
             ],
+            imgDefault: "default.webp"
         }
     },
     methods: {
         setLang,
         getStarRating,
+        getPath(img) {
+            return new URL(`../assets/${img}`, import.meta.url).href;
+        },
+        getImgUrl() {
+            //se il poster_path è null, metto un immagine di default
+            if (!this.filmData.poster_path) {
+                const path = this.getPath(this.imgDefault);
+                return path;
+            }
+
+            const start_path = "https://image.tmdb.org/t/p/";
+            const res_path = `${this.imgSize[3]}`;
+            const end_path = `${this.filmData.poster_path}`;
+
+            return start_path + res_path + end_path;
+        }
     }
 }
 
@@ -35,7 +52,7 @@ export default {
     <div class="film-item">
         <div class="img-container">
             <img class="img-poster" 
-            :src="`https://image.tmdb.org/t/p/${imgSize[2]+filmData.poster_path}`"
+            :src="getImgUrl()"
             :alt="filmData.title">
         </div>
         <div class="info">
@@ -61,12 +78,12 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/partials/mixins.scss" as *;
-
+@use "../styles/partials/_variables" as *;
 
 .film-item {
-    flex-basis: 185px;
-    max-width: 185px;
-    border: 1px solid black;
+    height: 100%;
+    flex-basis: calc((#{$a} / 4) - #{$b});
+    margin: 0 5px;
 
     ul {
         list-style-type: none;
@@ -112,11 +129,10 @@ export default {
         }
     }
 }
-
-.img-poster {
-    height: 278px;
-}
 .img-container {
-    overflow: hidden;
+
+    img {
+        width: 100%;
+    }
 }
 </style>

@@ -31,5 +31,5 @@ export const store = reactive({
             this.TvList = response.data.results;
             console.log(this.TvList);
         })
-    },
+    }
 });

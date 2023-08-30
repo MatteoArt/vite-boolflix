@@ -37,7 +37,7 @@ export default {
     <div class="tv-item">
         <div class="img-container">
             <img class="img-poster"
-            :src="`https://image.tmdb.org/t/p/${imgSize[2]+TvData.poster_path}`"
+            :src="`https://image.tmdb.org/t/p/${imgSize[3]+TvData.poster_path}`"
             :alt="TvData.name + ' poster'">
         </div>
         <div class="info">
@@ -63,11 +63,11 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/partials/mixins.scss" as *;
+@use "../styles/partials/_variables.scss" as *;
 
 .tv-item {
-    flex-basis: 185px;
-    max-width: 185px;
-    border: 1px solid black;
+    flex-basis: calc((#{$a} / 4) - #{$b});
+    margin: 0 5px;
 
     ul {
         list-style-type: none;
@@ -113,10 +113,10 @@ export default {
         }
     }
 }
-.img-poster {
-    height: 278px;
-}
 .img-container {
-    overflow: hidden;
+
+img {
+    width: 100%;
+}
 }
 </style>

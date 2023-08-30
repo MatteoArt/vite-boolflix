@@ -47,10 +47,6 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/partials/mixins.scss" as *;
 
-.main-container {
-    max-width: 1100px;
-    margin: auto;
-}
 section {
 
     &:last-child {
@@ -63,10 +59,7 @@ section {
 }
 .film-container, .tv-container {
     @include d-flex;
-    justify-content: center;
-    column-gap: 25px;
     flex-wrap: wrap;
     row-gap: 30px;
-    margin: auto;
 }
 </style>
